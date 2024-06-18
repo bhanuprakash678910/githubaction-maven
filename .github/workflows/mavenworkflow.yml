@@ -91,7 +91,7 @@ jobs:
         run: docker pull bhanuprakashece410/github-actions-maven:latest
 
       - name: Run Docker Container
-        run: docker run -d -p 80:80 --name website-container bhanuprakashece410/github-actions-maven:latest
+        run: docker run -d -p 80:6379 --name website-container bhanuprakashece410/github-actions-maven:latest
 
       - name: Wait for the container to be ready
         run: |
