@@ -80,11 +80,17 @@ jobs:
       - name: Pull Docker Image
         run: docker pull bhanuprakashece410/github-actions-maven:latest
 
-      - name: Run Docker Container
-      - run: docker create network my-network
-      - run: docker run -d --name redis --network my-network redis:latest
-      - run: docker run -d -p 8080:8080 --name website-container  -e REDIS_HOST=redis -e REDIS_PORT=6379 --network my-network bhanuprakashece410/github-actions-maven:latest
-      - run: docker logs website-container
+      - name: creating network
+        run: docker create network my-network
+        
+      - name: Run Docker  redis Container 
+        run: docker run -d --name redis --network my-network redis:latest
+        
+      - name: Run Docker APP Container
+        run: docker run -d -p 8080:8080 --name website-container  -e REDIS_HOST=redis -e REDIS_PORT=6379 --network my-network bhanuprakashece410/github-actions-maven:latest
+        
+      - name: logs of Docker App Container
+        run: docker logs website-container
  
 
      
