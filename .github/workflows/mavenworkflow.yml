@@ -91,18 +91,9 @@ jobs:
         run: docker pull bhanuprakashece410/github-actions-maven:latest
 
       - name: Run Docker Container
-        run: docker run -d -p 6379:6379 --name website-container bhanuprakashece410/github-actions-maven:latest
-
-      - name: Wait for the container to be ready
-        run: |
-          sleep 10
-          until $(curl --output /dev/null --silent --head --fail http://localhost:6379); do
-            echo 'Waiting for the container to start...'
-            sleep 5
-          done
-
-      - name: Check Website Output
-        run: curl -I http://localhost:6379
+        run: docker run -d -p 8080:8080 --name website-container bhanuprakashece410/github-actions-maven:latest
+      - name: Container logs
+        run: docker logs website-container
  
 
      
