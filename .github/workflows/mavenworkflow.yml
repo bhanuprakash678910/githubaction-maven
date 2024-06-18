@@ -63,7 +63,7 @@ jobs:
         run: docker push ${{ secrets.DOCKER_REPO }}
   deploy:
     runs-on: self-hosted
-     services:
+    services:
       redis:
         image: redis
         options: >-
