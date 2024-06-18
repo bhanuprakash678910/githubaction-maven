@@ -81,7 +81,7 @@ jobs:
         run: docker pull bhanuprakashece410/github-actions-maven:latest
 
       - name: creating network
-        run: docker create network my-network
+        run: docker network create my-network
         
       - name: Run Docker  redis Container 
         run: docker run -d --name redis --network my-network redis:latest
