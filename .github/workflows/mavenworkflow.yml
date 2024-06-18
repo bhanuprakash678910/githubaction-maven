@@ -9,7 +9,7 @@ on:
 jobs:
   build_and_test:
 
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     services:
       redis:
         image: redis
@@ -36,7 +36,7 @@ jobs:
     - name: Build and test project with Maven
       run: mvn -B package --file pom.xml
   publish-job:
-      runs-on: ubuntu-latest
+      runs-on: self-hosted
       needs: [build_and_test]
       steps:
         - uses: actions/checkout@v4.1.7
@@ -52,7 +52,7 @@ jobs:
             path: staging
   build-docker-image:
     name: Publish to Docker Hub
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: [build_and_test]
     steps:
       - uses: actions/checkout@v4.1.7
@@ -63,7 +63,7 @@ jobs:
       - name: Publish Docker image
         run: docker push ${{ secrets.DOCKER_REPO }}
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: [build-docker-image]
     steps:
       - name: Checkout Code
