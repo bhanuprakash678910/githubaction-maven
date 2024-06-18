@@ -2,9 +2,9 @@ name: Maven CI/CD
 
 on:
  push:
-    branches: [ docker ]
+    branches: [ dock ]
  pull_request:
-      branches: [ docker ]
+      branches: [ dock ]
 
 jobs:
   build_and_test:
@@ -63,6 +63,16 @@ jobs:
         run: docker push ${{ secrets.DOCKER_REPO }}
   deploy:
     runs-on: self-hosted
+     services:
+      redis:
+        image: redis
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - "6379:6379"
     needs: [build-docker-image]
     steps:
       - name: Checkout Code
