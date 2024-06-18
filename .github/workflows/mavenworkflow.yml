@@ -17,6 +17,7 @@ jobs:
       uses: actions/setup-java@v4.2.1
       with:
         java-version: 18
+        distribution: jdk
 
     - name: Build project with Maven
       run: mvn -B package --file pom.xml
